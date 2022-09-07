@@ -6,14 +6,14 @@ namespace graphql_api.Data.Repository
 {
     public class UpdateRepository : IUpdateRepository
     {
-        private readonly QueryFactory _queryFactory;
-        public UpdateRepository(QueryFactory queryFactory)
+        private readonly IDbProvider _dbProvider;
+        public UpdateRepository(IDbProvider dbProvider)
         {
-            _queryFactory = queryFactory;
+            _dbProvider = dbProvider;
         }
         public IEnumerable<Update> GetAll()
         {
-            return _queryFactory.Query("Updates").Get<Update>();
+            return _dbProvider.Database().Query("Updates").Get<Update>();
         }
     }
 }

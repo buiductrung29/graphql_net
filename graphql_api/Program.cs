@@ -1,4 +1,5 @@
 using GraphQL.Server.Ui.Playground;
+using graphql_api.Data;
 using graphql_api.Data.Repository;
 using graphql_api.Graphql;
 using graphql_api.Graphql.UpdateSchema;
@@ -12,13 +13,9 @@ using System.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services
-    .AddScoped((e) =>
-    {
-        var connection = new SqlConnection(builder.Configuration["ConnectionStrings:AppDbContext"]);
-        var compiler = new SqlServerCompiler();
-        return new QueryFactory(connection, compiler);
-    })
+    .AddScoped<IDbProvider, DbProvider>()
     .AddScoped<IUserRepository, UserRepository>()
+    .AddScoped<INationalIDRepository, NationalIDRepository>()
     .AddScoped<ICategoryRepository, CategoryRepository>()
     .AddScoped<IUpdateRepository, UpdateRepository>();
 builder.Services
@@ -26,6 +23,7 @@ builder.Services
     .AddQueryType<Query>()
     .AddType<UserType>()
     .AddType<StudentType>()
+    .AddType<NationalIDType>()
     .AddType<UpdateType>();
 builder.Services.AddCors();
 

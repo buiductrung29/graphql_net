@@ -10,6 +10,7 @@
 
     public class NationalID
     {
+        public Guid UserId { get; set; }
         public string IdNumber { get; set; }
         public string DateOfIssue { get; set; }
         public string PlaceOfIssue { get; set; }

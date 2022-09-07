@@ -6,14 +6,14 @@ namespace graphql_api.Data.Repository
 {
     public class UserRepository : IUserRepository
     {
-        private readonly QueryFactory _queryFactory;
-        public UserRepository(QueryFactory queryFactory)
+        private readonly IDbProvider _dbProvider;
+        public UserRepository(IDbProvider dbProvider)
         {
-            _queryFactory = queryFactory;
+            _dbProvider = dbProvider;
         }
-        public async Task<User?> GetById(Guid id)
+        public async Task<User> GetById(Guid id)
         {
-            return (await _queryFactory.Query("Users").Where("Id", id).GetAsync<User>()).FirstOrDefault();
+            return (await _dbProvider.Database().Query("Users").Where("Id", id).GetAsync<User>()).FirstOrDefault();
         }
     }
 }

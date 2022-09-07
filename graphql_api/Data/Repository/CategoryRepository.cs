@@ -6,19 +6,19 @@ namespace graphql_api.Data.Repository
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly QueryFactory _queryFactory;
-        public CategoryRepository(QueryFactory queryFactory)
+        private readonly IDbProvider _dbProvider;
+        public CategoryRepository(IDbProvider dbProvider)
         {
-            _queryFactory = queryFactory;
+            _dbProvider = dbProvider;
         }
-        public Category? GetById(int id)
+        public Category GetById(int id)
         {
-            return _queryFactory.Query("Categories").Where("Id", id).Get<Category>().FirstOrDefault();
+            return _dbProvider.Database().Query("Categories").Where("Id", id).Get<Category>().FirstOrDefault();
         }
 
         public IEnumerable<Category> GetAll()
         {
-            return _queryFactory.Query("Categories").Get<Category>();
+            return _dbProvider.Database().Query("Categories").Get<Category>();
         }
     }
 }

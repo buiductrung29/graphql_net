@@ -2,9 +2,9 @@
 
 namespace graphql_api.Graphql.UserSchema
 {
-    public class StudentType : ObjectType<User>
+    public class StudentType : ObjectType<Student>
     {
-        protected override void Configure(IObjectTypeDescriptor<User> descriptor)
+        protected override void Configure(IObjectTypeDescriptor<Student> descriptor)
         {
             descriptor.Description("");
             descriptor.Field(s => s.Id).Ignore();

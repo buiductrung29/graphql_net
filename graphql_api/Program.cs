@@ -2,7 +2,9 @@ using GraphQL.Server.Ui.Playground;
 using graphql_api.Data.Repository;
 using graphql_api.Graphql;
 using graphql_api.Graphql.UpdateSchema;
+using graphql_api.Graphql.UserSchema;
 using graphql_api.Interfaces;
+using graphql_api.Model;
 using Microsoft.Extensions.FileProviders;
 using SqlKata.Compilers;
 using SqlKata.Execution;
@@ -16,10 +18,14 @@ builder.Services
         var compiler = new SqlServerCompiler();
         return new QueryFactory(connection, compiler);
     })
+    .AddScoped<IUserRepository, UserRepository>()
+    .AddScoped<ICategoryRepository, CategoryRepository>()
     .AddScoped<IUpdateRepository, UpdateRepository>();
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
+    .AddType<UserType>()
+    .AddType<StudentType>()
     .AddType<UpdateType>();
 builder.Services.AddCors();
 

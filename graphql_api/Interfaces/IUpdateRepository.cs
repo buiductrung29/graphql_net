@@ -4,6 +4,6 @@ namespace graphql_api.Interfaces
 {
     public interface IUpdateRepository
     {
-        public IEnumerable<Update> All();
+        public IEnumerable<Update> GetAll();
     }
 }

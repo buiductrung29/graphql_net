@@ -5,6 +5,6 @@ namespace graphql_api.Graphql
 {
     public partial class Query
     {
-        public IEnumerable<Update> GetUpdates([Service] IUpdateRepository repo) => repo.All(); 
+        public IEnumerable<Update> GetUpdates([Service] IUpdateRepository repo) => repo.GetAll(); 
     }
 }

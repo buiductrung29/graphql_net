@@ -4,7 +4,9 @@
     {
         public Guid Id { get; set; }
         public DateTime PostedTime { get; set; }
-        public String? Title { get; set; }
-        public String? Detail { get; set; }
+        public string? Title { get; set; }
+        public string? Detail { get; set; }
+        public int CategoryId { get; set; }
+        public Guid UploaderId { get; set; }
     }
 }

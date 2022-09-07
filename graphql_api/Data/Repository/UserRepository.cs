@@ -4,16 +4,16 @@ using SqlKata.Execution;
 
 namespace graphql_api.Data.Repository
 {
-    public class UpdateRepository : IUpdateRepository
+    public class UserRepository : IUserRepository
     {
         private readonly QueryFactory _queryFactory;
-        public UpdateRepository(QueryFactory queryFactory)
+        public UserRepository(QueryFactory queryFactory)
         {
             _queryFactory = queryFactory;
         }
-        public IEnumerable<Update> GetAll()
+        public async Task<User?> GetById(Guid id)
         {
-            return _queryFactory.Query("Updates").Get<Update>();
+            return (await _queryFactory.Query("Users").Where("Id", id).GetAsync<User>()).FirstOrDefault();
         }
     }
 }

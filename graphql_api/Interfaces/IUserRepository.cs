@@ -4,6 +4,6 @@ namespace graphql_api.Interfaces
 {
     public interface IUserRepository
     {
-        public Task<User?> GetById(Guid id); 
+        public Task<User> GetById(Guid id); 
     }
 }
